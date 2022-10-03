@@ -8,7 +8,12 @@ const SALT = 'kr3dJJ1mPcIKisMOR4RO6w==';
 
 const MESSAGE = 'testtest';
 
-function encrypt(algorithm: string, password: string, salt: string, data: Buffer) {
+interface EncryptResult {
+  iv: Buffer,
+  encryptedData: Buffer
+}
+
+function encrypt(algorithm: string, password: string, salt: string, data: Buffer): EncryptResult {
 
   const key = crypto.scryptSync(password, salt, 32)
   const iv = crypto.randomBytes(16)
